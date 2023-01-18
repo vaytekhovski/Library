@@ -20,10 +20,7 @@ namespace Library.App.Authors.Commands.DeleteAuthor
                 throw new NotFoundException(nameof(author), request.Id);
             }
 
-            //TODO: delete author
-            //_dbService.DeleteAuthorAsync(author);
-            //await _dbService.SaveChangesAsync(cancellationToken);
-
+            await _dbService.DeleteAuthorAsync(author.Id);
             return Unit.Value;
         }
     }

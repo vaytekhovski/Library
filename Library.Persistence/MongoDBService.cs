@@ -33,18 +33,21 @@ namespace Library.Persistence
 
         public async Task<Author> GetAuthorAsync(string id)
         {
-            //return await _authors.Find()
-            throw new NotImplementedException();
+            return await _authors.Find(author => author.Id == id).FirstOrDefaultAsync();
         }
 
-        public Task DeleteAuthorAsync(string id)
+        public async Task DeleteAuthorAsync(string id)
         {
-            throw new NotImplementedException();
+            await _authors.DeleteOneAsync(author => author.Id == id);
+        }
+
+        public async Task UpdateAuthorAsync(string authorId, Author author)
+        {
+            await _authors.ReplaceOneAsync(author => author.Id == authorId, author);
         }
 
         public Task CreateBookAsync(string authorId, Book book)
         {
-            //FilterDefinition<Author>
             throw new NotImplementedException();
         }
 
@@ -59,6 +62,11 @@ namespace Library.Persistence
         }
 
         public Task DeleteBookAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateBookAsync(string bookId, Book book)
         {
             throw new NotImplementedException();
         }
