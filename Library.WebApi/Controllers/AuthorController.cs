@@ -7,62 +7,65 @@ using Library.WebApi.Models;
 using Library.App.Authors.Commands.CreateAuthor;
 using Library.App.Authors.Commands.UpdateAuthor;
 using Library.App.Authors.Commands.DeleteAuthor;
+using MediatR;
+using MongoDB.Bson;
 
 namespace Library.WebApi.Controllers
 {
-	[Route("api/[controller]")]
-	public class AuthorController : BaseController
+	[Route("api/[controller]/[action]")]
+	public class AuthorController : ControllerBase
 	{
 		private readonly IMapper _mapper;
+		private readonly IMediator _mediator;
 
-		public AuthorController(IMapper mapper)
-		{
-			_mapper = mapper;
-        }
+		public AuthorController(IMapper mapper, IMediator mediator) => (_mapper, _mediator) = (mapper, mediator);
 
         [HttpGet]
 		public async Task<ActionResult<AuthorListVm>> GetAll()
 		{
-			var query = new GetAuthorListQuery();
-			var vm = await Mediator.Send(query);
+			var vm = await _mediator.Send(new GetAuthorListQuery());
 			return Ok(vm);
 		}
 
 		[HttpGet("{id}")]
-		public async Task<ActionResult<AuthorDetailVm>> Get(Guid id)
+		public async Task<ActionResult<AuthorDetailVm>> Get(ObjectId id)
 		{
-			var query = new GetAuthorDetailQuery
-			{
-				Id = id
-			};
-			var vm = await Mediator.Send(query);
+			var vm = await _mediator.Send(new GetAuthorDetailQuery
+            {
+                Id = id
+            });
 			return Ok(vm);
 		}
 
 		[HttpPost]
-		public async Task<ActionResult<Guid>> Create([FromBody] CreateAuthorDto createAuthorDto)
+		public async Task<ActionResult<ObjectId>> Create([FromBody] CreateAuthorDto createAuthorDto)
 		{
 			var command = _mapper.Map<CreateAuthorCommand>(createAuthorDto);
-			var authorId = await Mediator.Send(command);
+			var authorId = await _mediator.Send(command);
 			return Ok(authorId);
 		}
 
-		[HttpPut]
+        [HttpPost]
+        public async Task<ActionResult<string>> Create()
+        {
+            return Ok("it works");
+        }
+
+        [HttpPut]
 		public async Task<IActionResult> Update([FromBody] UpdateAuthorDto updateAuthorDto)
 		{
 			var command = _mapper.Map<UpdateAuthorCommand>(updateAuthorDto);
-			await Mediator.Send(command);
+			await _mediator.Send(command);
 			return NoContent();
 		}
 
 		[HttpDelete("{id}")]
-		public async Task<IActionResult> Delete(Guid id)
+		public async Task<IActionResult> Delete(ObjectId id)
 		{
-			var command = new DeleteAuthorCommand
-			{
-				Id = id
-			};
-			await Mediator.Send(command);
+			await _mediator.Send(new DeleteAuthorCommand
+            {
+                Id = id
+            });
 			return NoContent();
 		}
 	}

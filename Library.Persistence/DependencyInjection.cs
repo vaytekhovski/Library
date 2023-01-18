@@ -12,14 +12,12 @@ namespace Library.Persistence
 		public static IServiceCollection AddPersistence(this IServiceCollection services,
              IConfiguration configuration)
 		{
-			
-			var connectionString = configuration["DbConnection"];
-			services.AddDbContext<AuthorsDbContext>(options =>
-			{
-				//options.UseSqlite(connectionString);
+			//services.AddDbContext<AuthorsDbContext>(options =>
+			//{
+			//	//options.UseSqlite(connectionString);
 
-            });
-			services.AddScoped<IAuthorDbContext>(provider => provider.GetService<AuthorsDbContext>());
+   //         });
+			//services.AddScoped<IAuthorDbContext>(provider => provider.GetService<AuthorsDbContext>());
 			return services;
 		}
 	}
