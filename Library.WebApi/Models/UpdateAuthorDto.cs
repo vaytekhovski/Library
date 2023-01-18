@@ -9,7 +9,7 @@ namespace Library.WebApi.Models
     public class UpdateAuthorDto : IMapWith<UpdateAuthorDto>
     {
         public Guid Id { get; set; }
-        public DateOnly? DateOfDeath { get; set; }
+        public DateTime? DateOfDeath { get; set; }
 
         public void Mapping(Profile profile)
         {

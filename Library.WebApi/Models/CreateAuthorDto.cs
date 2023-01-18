@@ -9,8 +9,8 @@ namespace Library.WebApi.Models
 	{
 		public string FullName { get; set; }
 		public string Biography { get; set; }
-		public DateOnly? DateOfBirth { get; set; }
-		public DateOnly? DateOfDeath { get; set; }
+		public DateTime? DateOfBirth { get; set; }
+		public DateTime? DateOfDeath { get; set; }
 
 		public void Mapping(Profile profile)
 		{
