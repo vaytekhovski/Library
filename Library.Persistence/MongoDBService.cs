@@ -31,34 +31,34 @@ namespace Library.Persistence
             return await _authors.Find(new BsonDocument()).ToListAsync();
         }
 
-        public async Task<Author> GetAuthorAsync(ObjectId id)
+        public async Task<Author> GetAuthorAsync(string id)
         {
             //return await _authors.Find()
             throw new NotImplementedException();
         }
 
-        public Task DeleteAuthorAsync(ObjectId id)
+        public Task DeleteAuthorAsync(string id)
         {
             throw new NotImplementedException();
         }
 
-        public Task CreateBookAsync(ObjectId authorId, Book book)
+        public Task CreateBookAsync(string authorId, Book book)
         {
             //FilterDefinition<Author>
             throw new NotImplementedException();
         }
 
-        public Task<Book> GetBookAsync(ObjectId bookId)
+        public Task<Book> GetBookAsync(string bookId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Book>> GetBooksAsync(ObjectId authorId)
+        public Task<List<Book>> GetBooksAsync(string authorId)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteBookAsync(ObjectId id)
+        public Task DeleteBookAsync(string id)
         {
             throw new NotImplementedException();
         }

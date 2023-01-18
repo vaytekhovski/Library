@@ -6,13 +6,13 @@ using MongoDB.Bson;
 
 namespace Library.App.Authors.Commands.CreateAuthor
 {
-	public class CreateAuthorCommandHandler : IRequestHandler<CreateAuthorCommand, ObjectId?>
+	public class CreateAuthorCommandHandler : IRequestHandler<CreateAuthorCommand, string?>
 	{
         private readonly IMongoDBService _dbService;
 
         public CreateAuthorCommandHandler(IMongoDBService dbContext) => _dbService = dbContext;
 
-        public async Task<ObjectId?> Handle(CreateAuthorCommand request, CancellationToken cancellationToken)
+        public async Task<string?> Handle(CreateAuthorCommand request, CancellationToken cancellationToken)
         {
             var author = new Author()
             {

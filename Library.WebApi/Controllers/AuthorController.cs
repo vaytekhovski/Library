@@ -28,7 +28,7 @@ namespace Library.WebApi.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public async Task<ActionResult<AuthorDetailVm>> Get(ObjectId id)
+		public async Task<ActionResult<AuthorDetailVm>> Get(string id)
 		{
 			var vm = await _mediator.Send(new GetAuthorDetailQuery
             {
@@ -38,7 +38,7 @@ namespace Library.WebApi.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult<ObjectId>> Create([FromBody] CreateAuthorDto createAuthorDto)
+		public async Task<ActionResult<string>> Create([FromBody] CreateAuthorDto createAuthorDto)
 		{
 			var command = _mapper.Map<CreateAuthorCommand>(createAuthorDto);
 			var authorId = await _mediator.Send(command);
@@ -60,7 +60,7 @@ namespace Library.WebApi.Controllers
 		}
 
 		[HttpDelete("{id}")]
-		public async Task<IActionResult> Delete(ObjectId id)
+		public async Task<IActionResult> Delete(string id)
 		{
 			await _mediator.Send(new DeleteAuthorCommand
             {
