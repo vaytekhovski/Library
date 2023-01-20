@@ -12,7 +12,8 @@ using MongoDB.Bson;
 
 namespace Library.WebApi.Controllers
 {
-	[Route("api/[controller]/[action]")]
+	//[Produces("application/json")]
+	[Route("api/authors")]
 	public class AuthorController : ControllerBase
 	{
 		private readonly IMapper _mapper;
@@ -20,8 +21,12 @@ namespace Library.WebApi.Controllers
 
 		public AuthorController(IMapper mapper, IMediator mediator) => (_mapper, _mediator) = (mapper, mediator);
 
+		/// <summary>
+		/// Get the list of authors
+		/// </summary>
+		/// <returns></returns>
         [HttpGet]
-		public async Task<ActionResult<AuthorListVm>> GetAll()
+		public async Task<ActionResult<List<AuthorDetailVm>>> GetAll()
 		{
 			var vm = await _mediator.Send(new GetAuthorListQuery());
 			return Ok(vm);
@@ -30,7 +35,7 @@ namespace Library.WebApi.Controllers
 		[HttpGet("{id}")]
 		public async Task<ActionResult<AuthorDetailVm>> Get(string id)
 		{
-			var vm = await _mediator.Send(new GetAuthorDetailQuery
+			var vm = await _mediator.Send(new GetAuthorDetailsQuery
             {
                 Id = id
             });
@@ -44,12 +49,6 @@ namespace Library.WebApi.Controllers
 			var authorId = await _mediator.Send(command);
 			return Ok(authorId);
 		}
-
-        [HttpPost]
-        public async Task<ActionResult<string>> Create()
-        {
-            return Ok("it works");
-        }
 
         [HttpPut]
 		public async Task<IActionResult> Update([FromBody] UpdateAuthorDto updateAuthorDto)

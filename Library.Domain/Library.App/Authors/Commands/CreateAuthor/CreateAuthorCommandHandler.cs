@@ -13,9 +13,10 @@ namespace Library.App.Authors.Commands.CreateAuthor
         public CreateAuthorCommandHandler(IMongoDBService dbContext) => _dbService = dbContext;
 
         public async Task<string?> Handle(CreateAuthorCommand request, CancellationToken cancellationToken)
-        {
+         {
             var author = new Author()
             {
+                ImageURI = request.ImageURI,
                 FullName = request.FullName,
                 Biography = request.Biography,
                 DateOfBirth = request.DateOfBirth,

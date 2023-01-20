@@ -46,29 +46,35 @@ namespace Library.Persistence
             await _authors.ReplaceOneAsync(author => author.Id == authorId, author);
         }
 
-        public Task CreateBookAsync(string authorId, Book book)
+        public async Task CreateBookAsync(Book book)
         {
-            throw new NotImplementedException();
+            await _books.InsertOneAsync(book);
+            return;
         }
 
-        public Task<Book> GetBookAsync(string bookId)
+        public async Task<Book> GetBookAsync(string id)
         {
-            throw new NotImplementedException();
+            return await _books.Find(Book => Book.Id == id).FirstOrDefaultAsync();
         }
 
-        public Task<List<Book>> GetBooksAsync(string authorId)
+        public async Task<List<Book>> GetBooksByAuthorAsync(string authorId)
         {
-            throw new NotImplementedException();
+            return await _books.Find(Book => Book.AuthorsId.Contains(authorId)).ToListAsync();
         }
 
-        public Task DeleteBookAsync(string id)
+        public async Task<List<Book>> GetBooksAsync()
         {
-            throw new NotImplementedException();
+            return await _books.Find(new BsonDocument()).ToListAsync();
         }
 
-        public Task UpdateBookAsync(string bookId, Book book)
+        public async Task DeleteBookAsync(string id)
         {
-            throw new NotImplementedException();
+            await _books.DeleteOneAsync(book => book.Id == id);
+        }
+
+        public async Task UpdateBookAsync(string bookId, Book book)
+        {
+            await _books.ReplaceOneAsync(book => book.Id == bookId, book);
         }
     }
 }

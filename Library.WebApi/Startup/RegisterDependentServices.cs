@@ -44,6 +44,8 @@ namespace Library.WebApi.Startup
                 });
             });
 
+            builder.Services.AddSwaggerGen();
+
             return builder;
         }
     }
