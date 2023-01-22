@@ -3,19 +3,14 @@ using Library.App.Interfaces;
 using Library.App.Common;
 using MediatR;
 using MongoDB.Bson;
-using MongoDB.Driver;
 
 namespace Library.App.Authors.Commands.CreateAuthor
 {
 	public class CreateAuthorCommandHandler : IRequestHandler<CreateAuthorCommand, string?>
 	{
-        public IMongoCollection<Author> _authors { get; set; }
+        private readonly IMongoDBService _dbService;
 
-        public CreateAuthorCommandHandler(IMongoDBSettings settings, IMongoClient mongoClient)
-        {
-            IMongoDatabase database = mongoClient.GetDatabase(settings.DatabaseName);
-            _authors = database.GetCollection<Author>(settings.AuthorsCollectionName);
-        }
+        public CreateAuthorCommandHandler(IMongoDBService dbContext) => _dbService = dbContext;
 
         public async Task<string?> Handle(CreateAuthorCommand request, CancellationToken cancellationToken)
          {
@@ -27,7 +22,8 @@ namespace Library.App.Authors.Commands.CreateAuthor
                 DateOfBirth = request.DateOfBirth,
                 DateOfDeath = request.DateOfDeath
             };
-            await _authors.InsertOneAsync(author);
+
+            await _dbService.CreateAuthorAsync(author);
 
             return author.Id;
         }

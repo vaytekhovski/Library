@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Library.App.Interfaces
+namespace Library.Persistence
 {
 	public class MongoDBSettings : IMongoDBSettings
 	{

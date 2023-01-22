@@ -8,12 +8,12 @@ using MongoDB.Driver;
 
 namespace Library.Persistence
 {
-    public class DeleteMongoDBService : IMongoDBService
+    public class MongoDBService : IMongoDBService
     {
         public IMongoCollection<Author> _authors { get; set; }
         public IMongoCollection<Book> _books { get; set; }
 
-        public DeleteMongoDBService(IMongoDBSettings settings, IMongoClient mongoClient)
+        public MongoDBService(IMongoDBSettings settings, IMongoClient mongoClient)
         {
             IMongoDatabase database = mongoClient.GetDatabase(settings.DatabaseName);
             _authors = database.GetCollection<Author>(settings.AuthorsCollectionName);
