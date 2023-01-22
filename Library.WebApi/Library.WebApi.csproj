@@ -34,8 +34,5 @@
     <ProjectReference Include="..\Library.Domain\Library.App\Library.App.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
-    <ProjectReference Include="..\Library.Persistence\Library.Persistence.csproj">
-      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
-    </ProjectReference>
   </ItemGroup>
 </Project>
