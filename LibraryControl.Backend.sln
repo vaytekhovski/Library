@@ -15,9 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Persistence", "Libr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.WebApi", "Library.WebApi\Library.WebApi.csproj", "{9B58FE91-17D9-48CB-AA15-CFF2A3278974}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.App", "Library.Domain\Library.App\Library.App.csproj", "{87CCC781-E64C-4A6D-888C-5C85625B5B28}"
-EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "Library.Application", "Library.Domain\Library.Application\Library.Application.csproj", "{D7998097-5E34-48BB-84B6-40C23123D1C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.App", "Library.App\Library.App.csproj", "{87CCC781-E64C-4A6D-888C-5C85625B5B28}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authors.Tests", "Authors.Tests\Authors.Tests.csproj", "{65041989-97F2-495F-A60F-FCD28B56D2D3}"
 EndProject
